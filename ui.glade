@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkWindow" id="window_main">
+    <property name="width_request">100</property>
+    <property name="height_request">100</property>
+    <property name="can_focus">False</property>
+    <property name="resizable">False</property>
+    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
+    <child>
+      <object class="GtkGrid" id="grid2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <child>
+          <object class="GtkButton" id="button_up">
+            <property name="label" translatable="yes">UP</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <signal name="key-press-event" handler="on_button_up_key_press_event" swapped="no"/>
+            <signal name="key-release-event" handler="on_button_up_key_release_event" swapped="no"/>
+            <signal name="pressed" handler="on_button_up_pressed" swapped="no"/>
+            <signal name="released" handler="on_button_up_released" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_left">
+            <property name="label" translatable="yes">LEFT</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <signal name="key-press-event" handler="on_button_left_key_press_event" swapped="no"/>
+            <signal name="key-release-event" handler="on_button_left_key_release_event" swapped="no"/>
+            <signal name="pressed" handler="on_button_left_pressed" swapped="no"/>
+            <signal name="released" handler="on_button_left_released" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_right">
+            <property name="label" translatable="yes">RIGHT</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <signal name="key-press-event" handler="on_button_right_key_press_event" swapped="no"/>
+            <signal name="key-release-event" handler="on_button_right_key_release_event" swapped="no"/>
+            <signal name="pressed" handler="on_button_right_pressed" swapped="no"/>
+            <signal name="released" handler="on_button_right_released" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_down">
+            <property name="label" translatable="yes">DOWN</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <signal name="key-press-event" handler="on_button_down_key_press_event" swapped="no"/>
+            <signal name="key-release-event" handler="on_button_down_key_release_event" swapped="no"/>
+            <signal name="pressed" handler="on_button_down_pressed" swapped="no"/>
+            <signal name="released" handler="on_button_down_released" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Telescope
+  Control</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
