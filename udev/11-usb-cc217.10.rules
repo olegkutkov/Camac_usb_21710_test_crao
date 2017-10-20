@@ -1,0 +1,10 @@
+#SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device",
+#ATTRS{idVendor}=="0547", ATTRS{idProduct}=="1002", RUN+="/sbin/fxload -t fx2 -I /usr/share/usb/FX2_to_CC217.hex -D $env{DEVNAME}"
+
+#LABEL="vidpid_end"
+
+ATTRS{idVendor}=="0547", ATTRS{idProduct}=="1002", MODE="0776"
+
+SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="04b4", MODE="0776"\
+    ATTRS{idProduct}=="8613", RUN+="/sbin/fxload -v -t fx2 -I\
+    /usr/share/usb/FX2_to_CC217.hex -D $env{DEVNAME}"
