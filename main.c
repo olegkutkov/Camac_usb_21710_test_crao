@@ -1,4 +1,5 @@
 
+#include <gtk/gtk.h>
 #include <libusb-1.0/libusb.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -249,8 +250,65 @@ void FastDriverControl(struct libusb_device_handle *handle, uint8_t enable, uint
 	}
 }
 
-int main()
+void on_window_main_destroy()
 {
+	gtk_main_quit();
+}
+
+
+void on_button_up_pressed(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 1, 1, 1); //enable 1  plus 1  coor 1 elev south
+}
+
+void on_button_up_released(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 0, 1, 1); //enable 0  plus 1  coor 1 elev south
+}
+
+void on_button_down_pressed(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 1, 0, 1); //enable 1  plus 0  coor 1 elev south
+}
+
+void on_button_down_released(GtkButton *bt, struct libusb_device_handle *handle)
+{	
+	FastDriverControl(handle, 0, 0, 1); //enable 0  plus 0  coor 1 elev south
+}
+
+void on_button_right_pressed(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 1, 1, 0); //enable 1  plus 1  coor 0 az south
+}
+
+void on_button_right_released(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 0, 1, 0); //enable 0  plus 1  coor 0 az south
+}
+
+void on_button_left_pressed(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 1, 0, 0); //enable 1  plus 0  coor 0 az south
+}
+
+void on_button_left_released(GtkButton *bt, struct libusb_device_handle *handle)
+{
+	FastDriverControl(handle, 0, 0, 0); //enable 0  plus 0  coor 0 az south
+}
+
+
+int main(int argc, char *argv[])
+{
+	GtkBuilder *builder;
+	GtkWidget *window;
+	GtkButton *up_btn;
+	GtkButton *down_btn;
+	GtkButton *left_btn;
+	GtkButton *right_btn;
+
+	gtk_init(&argc, &argv);
+	builder = gtk_builder_new();
+
 	libusb_init(NULL);
 
 	printf("Trying to open USB device with vid=0x0547 and pid=0x1002 ...\n");
@@ -309,6 +367,32 @@ int main()
 		CommMUP(handle, SlowOff, koor);
 	}
 
+///
+	gtk_builder_add_from_file (builder, "./ui.glade", NULL);
+	window = GTK_WIDGET(gtk_builder_get_object(builder, "window_main"));
+
+	up_btn = GTK_BUTTON(gtk_builder_get_object(builder, "button_up"));
+	down_btn = GTK_BUTTON(gtk_builder_get_object(builder, "button_down"));
+	left_btn = GTK_BUTTON(gtk_builder_get_object(builder, "button_left"));
+	right_btn = GTK_BUTTON(gtk_builder_get_object(builder, "button_right"));
+
+	g_signal_connect (window, "destroy", G_CALLBACK (on_window_main_destroy), NULL);
+	g_signal_connect(up_btn, "pressed", G_CALLBACK (on_button_up_pressed), handle);
+	g_signal_connect(up_btn, "released", G_CALLBACK (on_button_up_released), handle);
+
+	g_signal_connect(down_btn, "pressed", G_CALLBACK (on_button_down_pressed), handle);
+	g_signal_connect(down_btn, "released", G_CALLBACK (on_button_down_released), handle);
+
+	g_signal_connect(right_btn, "pressed", G_CALLBACK (on_button_right_pressed), handle);
+	g_signal_connect(right_btn, "released", G_CALLBACK (on_button_right_released), handle);
+
+	g_signal_connect(left_btn, "pressed", G_CALLBACK (on_button_left_pressed), handle);
+	g_signal_connect(left_btn, "released", G_CALLBACK (on_button_left_released), handle);
+
+	g_object_unref(builder);
+
+	gtk_widget_show(window);
+	gtk_main();
 ///
 
 	libusb_release_interface(handle, 0);
